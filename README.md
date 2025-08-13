@@ -105,21 +105,23 @@ everything relative with react
 
   import { useState } from "react";
 
-  export default function UserProfile() {
-  // Khởi tạo một đối tượng user trong state
-  const [user, setUser] = useState({
-  name: "John Doe",
-  age: 30,
-  email: "johndoe@example.com",
-  });
-  const updateUserEmail = (newEmail) => {
-  // Không nên thay đổi trạng thái đối tượng user trực tiếp
-  // Tạo một bản sao mới và cập nhật state
-  const updatedUser = { ...user, email: newEmail };
-  setUser(updatedUser);
-  };
+<<<<<<< HEAD
+export default function UserProfile() {
+// Khởi tạo một đối tượng user trong state
+const [user, setUser] = useState({
+name: "John Doe",
+age: 30,
+email: "johndoe@example.com",
+});
+const updateUserEmail = (newEmail) => {
+// Không nên thay đổi trạng thái đối tượng user trực tiếp
+// Tạo một bản sao mới và cập nhật state
+const updatedUser = { ...user, email: newEmail };
+setUser(updatedUser);
+};
 
-  return (
+return (
+
   <div>
   <p>Tên: {user.name}</p>
   <p>Tuổi: {user.age}</p>
@@ -130,6 +132,35 @@ everything relative with react
   </div>
   );
   }
+
+=======
+export default function UserProfile() {
+// Khởi tạo một đối tượng user trong state
+const [user, setUser] = useState({
+name: "John Doe",
+age: 30,
+email: "<johndoe@example.com>",
+});
+const updateUserEmail = (newEmail) => {
+// Không nên thay đổi trạng thái đối tượng user trực tiếp
+// Tạo một bản sao mới và cập nhật state
+const updatedUser = { ...user, email: newEmail };
+setUser(updatedUser);
+};
+
+    return (
+      <div>
+        <p>Tên: {user.name}</p>
+        <p>Tuổi: {user.age}</p>
+        <p>Email: {user.email}</p>
+        <button onClick={() => updateUserEmail("newemail@example.com")}>
+        Đổi Email
+        </button>
+      </div>
+    );
+    }
+
+> > > > > > > dc202b6b89b8213aebb80808041c89763af0fd88
 
 ## UseEffect trong React
 
@@ -168,12 +199,10 @@ everything relative with react
 
 - userEffect chỉ làm 2 việc
 
-* setup
-* cleanup
-  | Class method | useEffect tương ứng |
+  | Class method           | useEffect tương ứng                             |
   | ---------------------- | ----------------------------------------------- |
-  | `componentDidMount` | `useEffect(() => {...}, [])` |
-  | `componentDidUpdate` | `useEffect(() => {...}, [deps])` |
+  | `componentDidMount`    | `useEffect(() => {...}, [])`                    |
+  | `componentDidUpdate`   | `useEffect(() => {...}, [deps])`                |
   | `componentWillUnmount` | Cleanup trong `useEffect`: `return () => {...}` |
 
 Dùng trong các giai đoạn:
@@ -184,6 +213,57 @@ Dùng trong các giai đoạn:
 | Kiểm soát render lại hay không | `shouldComponentUpdate` |
 | Lưu scroll, DOM snapshot | `getSnapshotBeforeUpdate` |
 | Dọn dẹp timer, event listener | `componentWillUnmount` / cleanup trong `useEffect` |
+
+- setup
+- cleanup
+  | Class method | useEffect tương ứng |
+  | ---------------------- | ----------------------------------------------- |
+  | `componentDidMount` | `useEffect(() => {...}, [])` |
+  | `componentDidUpdate` | `useEffect(() => {...}, [deps])` |
+  | `componentWillUnmount` | Cleanup trong `useEffect`: `return () => {...}` |
+
+Dùng trong các giai đoạn:
+
+| Mục đích                       | Giai đoạn phù hợp                                  |
+| ------------------------------ | -------------------------------------------------- |
+| Gọi API, fetch dữ liệu         | `componentDidMount` / `useEffect(..., [])`         |
+| Đồng bộ state với props        | `getDerivedStateFromProps`                         |
+| Kiểm soát render lại hay không | `shouldComponentUpdate`                            |
+| Lưu scroll, DOM snapshot       | `getSnapshotBeforeUpdate`                          |
+| Dọn dẹp timer, event listener  | `componentWillUnmount` / cleanup trong `useEffect` |
+
+#### React Router
+
+#### Các thành phần trong react router
+
+- `BrowserRouter` là một thành phần được sử dụng để bọc toàn bộ ứng dụng reactjs, sử dụng HTML5 history API (thay đổi url của trang web mà không cần reload lại trang) để giữ cho URL được đồng bộ với trạng thái ứng dụng.
+- Route là thành phần để xác định một đường dẫn và liên kết nó với một component React cụ thể. Nếu đường dẫn trên thanh địa chỉ phù hợp với định nghĩa trong Route, component được chỉ định sẽ được hiển thị.
+
+  import { Route } from 'react-router-dom';
+  function App() {
+  return (
+    <div>
+          <Route path="/" exact component={Home} />
+          <Route path="/about" component={About} />
+        </div>
+      );
+    }
+
+- Link là thành phần tạo ra liên kết giữa các trang mà không làm tải lại trang.
+
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">Trang Chủ</Link>
+        </li>
+        <li>
+          <Link to="/about">Về Chúng Tôi</Link>
+        </li>
+      </ul>
+    </nav>
+
+- Switch được sử dụng để bao bọc các thành phần Route, với Route trang web sẽ render và hiển thị các thành phần đầu tiên phù hợp với địa chỉ. Điều này giúp tránh hiển thị nhiều component cùng lúc.
+- Redirect là một thành phần được sử dụng để chuyển hướng người dùng từ một đường dẫn khác. Nếu người dùng truy cập đường dẫn được xác định trong Redirect, họ sẽ được chuyển hướng đến địa chỉ mới.
 
 ## NextJS
 
