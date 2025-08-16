@@ -105,21 +105,23 @@ everything relative with react
 
   import { useState } from "react";
 
-  export default function UserProfile() {
-  // Khởi tạo một đối tượng user trong state
-  const [user, setUser] = useState({
-  name: "John Doe",
-  age: 30,
-  email: "<johndoe@example.com>",
-  });
-  const updateUserEmail = (newEmail) => {
-  // Không nên thay đổi trạng thái đối tượng user trực tiếp
-  // Tạo một bản sao mới và cập nhật state
-  const updatedUser = { ...user, email: newEmail };
-  setUser(updatedUser);
-  };
 
-  return (
+export default function UserProfile() {
+// Khởi tạo một đối tượng user trong state
+const [user, setUser] = useState({
+name: "John Doe",
+age: 30,
+email: "johndoe@example.com",
+});
+const updateUserEmail = (newEmail) => {
+// Không nên thay đổi trạng thái đối tượng user trực tiếp
+// Tạo một bản sao mới và cập nhật state
+const updatedUser = { ...user, email: newEmail };
+setUser(updatedUser);
+};
+
+return (
+
   <div>
   <p>Tên: {user.name}</p>
   <p>Tuổi: {user.age}</p>
@@ -130,6 +132,33 @@ everything relative with react
   </div>
   );
   }
+
+export default function UserProfile() {
+// Khởi tạo một đối tượng user trong state
+const [user, setUser] = useState({
+name: "John Doe",
+age: 30,
+email: "<johndoe@example.com>",
+});
+const updateUserEmail = (newEmail) => {
+// Không nên thay đổi trạng thái đối tượng user trực tiếp
+// Tạo một bản sao mới và cập nhật state
+const updatedUser = { ...user, email: newEmail };
+setUser(updatedUser);
+};
+
+    return (
+      <div>
+        <p>Tên: {user.name}</p>
+        <p>Tuổi: {user.age}</p>
+        <p>Email: {user.email}</p>
+        <button onClick={() => updateUserEmail("newemail@example.com")}>
+        Đổi Email
+        </button>
+      </div>
+    );
+    }
+
 
 ## UseEffect trong React
 
@@ -167,6 +196,21 @@ everything relative with react
 ## Life cycle trong react (funtion component)
 
 - userEffect chỉ làm 2 việc
+
+  | Class method           | useEffect tương ứng                             |
+  | ---------------------- | ----------------------------------------------- |
+  | `componentDidMount`    | `useEffect(() => {...}, [])`                    |
+  | `componentDidUpdate`   | `useEffect(() => {...}, [deps])`                |
+  | `componentWillUnmount` | Cleanup trong `useEffect`: `return () => {...}` |
+
+Dùng trong các giai đoạn:
+| Mục đích | Giai đoạn phù hợp |
+| ------------------------------ | -------------------------------------------------- |
+| Gọi API, fetch dữ liệu | `componentDidMount` / `useEffect(..., [])` |
+| Đồng bộ state với props | `getDerivedStateFromProps` |
+| Kiểm soát render lại hay không | `shouldComponentUpdate` |
+| Lưu scroll, DOM snapshot | `getSnapshotBeforeUpdate` |
+| Dọn dẹp timer, event listener | `componentWillUnmount` / cleanup trong `useEffect` |
 
 - setup
 - cleanup
@@ -218,6 +262,7 @@ Dùng trong các giai đoạn:
 
 - Switch được sử dụng để bao bọc các thành phần Route, với Route trang web sẽ render và hiển thị các thành phần đầu tiên phù hợp với địa chỉ. Điều này giúp tránh hiển thị nhiều component cùng lúc.
 - Redirect là một thành phần được sử dụng để chuyển hướng người dùng từ một đường dẫn khác. Nếu người dùng truy cập đường dẫn được xác định trong Redirect, họ sẽ được chuyển hướng đến địa chỉ mới.
+
 - `useNavigate()` dùng để điều hướng trang (sử dụng trong button
   const handleClick = () => {
   // Điều hướng đến trang /about
@@ -248,3 +293,19 @@ Dùng trong các giai đoạn:
 | `X-API-Key`      | Bảo mật nội bộ                      |
 | `X-App-Version`  | Tracking phiên bản app              |
 | `X-Feature-Flag` | Bật/tắt tính năng thử nghiệm        |
+
+
+## NextJS
+
+### NextImage
+
+- Trong Next.js, next/image là một component được tối ưu hóa để hiển thị hình ảnh trên các ứng dụng web. Nó tự động xử lý nhiều tác vụ tối ưu hóa hình ảnh, giúp cải thiện hiệu suất tải trang và trải nghiệm người dùng
+
+#### Các Tính Năng Nổi Bật
+
+- next/image không chỉ đơn giản là một thẻ `<img>` thay thế; nó cung cấp nhiều tính năng quan trọng:
+- Tối ưu hóa kích thước: Tự động thay đổi kích thước hình ảnh dựa trên thiết bị của người dùng, giúp giảm dung lượng tải xuống.
+- Lazy Loading (Tải Trì Hoãn): Chỉ tải hình ảnh khi nó sắp hiển thị trong khung nhìn của người dùng, giúp trang tải nhanh hơn.
+- Định dạng hình ảnh hiện đại: Chuyển đổi hình ảnh sang các định dạng tối ưu như WebP khi trình duyệt hỗ trợ.
+- Chống dồn layout (Layout Shift): Tự động thêm placeholder để ngăn trang bị dồn khi hình ảnh tải xong, mang lại trải nghiệm mượt mà hơn.
+- Tên file băm: Đổi tên file hình ảnh thành một chuỗi duy nhất để tận dụng bộ nhớ đệm (caching) hiệu quả hơn.
