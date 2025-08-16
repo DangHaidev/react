@@ -105,7 +105,7 @@ everything relative with react
 
   import { useState } from "react";
 
-<<<<<<< HEAD
+
 export default function UserProfile() {
 // Khởi tạo một đối tượng user trong state
 const [user, setUser] = useState({
@@ -133,7 +133,6 @@ return (
   );
   }
 
-=======
 export default function UserProfile() {
 // Khởi tạo một đối tượng user trong state
 const [user, setUser] = useState({
@@ -160,7 +159,6 @@ setUser(updatedUser);
     );
     }
 
-> > > > > > > dc202b6b89b8213aebb80808041c89763af0fd88
 
 ## UseEffect trong React
 
@@ -264,6 +262,38 @@ Dùng trong các giai đoạn:
 
 - Switch được sử dụng để bao bọc các thành phần Route, với Route trang web sẽ render và hiển thị các thành phần đầu tiên phù hợp với địa chỉ. Điều này giúp tránh hiển thị nhiều component cùng lúc.
 - Redirect là một thành phần được sử dụng để chuyển hướng người dùng từ một đường dẫn khác. Nếu người dùng truy cập đường dẫn được xác định trong Redirect, họ sẽ được chuyển hướng đến địa chỉ mới.
+
+- `useNavigate()` dùng để điều hướng trang (sử dụng trong button
+  const handleClick = () => {
+  // Điều hướng đến trang /about
+  navigate('/about');
+  };
+  )
+- `useParams()` lấy tham số
+- Lazy loading, bọc import component vào React.lazy()
+
+#### Axios
+
+| Tính năng        | Mô tả ngắn                                    |
+| ---------------- | --------------------------------------------- |
+| HTTP methods     | `GET`, `POST`, `PUT`, `DELETE`, `PATCH`, ...  |
+| Promise-based    | Dễ dùng với `.then()` hoặc `async/await`      |
+| Custom headers   | Hỗ trợ xác thực, metadata, API key,...        |
+| FormData support | Gửi tệp tin, ảnh,... dễ dàng                  |
+| Interceptors     | Xử lý logic chung cho request/response        |
+| Tạo instance     | Dùng cho nhiều API khác nhau trong cùng dự án |
+
+#### Custom header
+
+| Header           | Mục đích                            |
+| ---------------- | ----------------------------------- |
+| `Authorization`  | Xác thực người dùng (token, bearer) |
+| `Content-Type`   | Chỉ định kiểu dữ liệu gửi           |
+| `X-User-ID`      | Gửi thông tin người dùng            |
+| `X-API-Key`      | Bảo mật nội bộ                      |
+| `X-App-Version`  | Tracking phiên bản app              |
+| `X-Feature-Flag` | Bật/tắt tính năng thử nghiệm        |
+
 
 ## NextJS
 
