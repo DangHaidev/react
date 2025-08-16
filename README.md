@@ -35,7 +35,7 @@ everything relative with react
     function Profile() {
       return <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />;
     }
-    
+
     export default function Gallery() {
       return (
         <section>
@@ -103,45 +103,45 @@ everything relative with react
 
 - Tạo ra một bản sao. sau đó dùng bản sao cập nhật obj gốc.
 
-    import { useState } from "react";
+  import { useState } from "react";
 
-    export default function UserProfile() {
-      // Khởi tạo một đối tượng user trong state
-      const [user, setUser] = useState({
-        name: "John Doe",
-        age: 30,
-        email: "<johndoe@example.com>",
-      });
-      const updateUserEmail = (newEmail) => {
-        // Không nên thay đổi trạng thái đối tượng user trực tiếp
-        // Tạo một bản sao mới và cập nhật state
-        const updatedUser = { ...user, email: newEmail };
-        setUser(updatedUser);
-      };
+  export default function UserProfile() {
+  // Khởi tạo một đối tượng user trong state
+  const [user, setUser] = useState({
+  name: "John Doe",
+  age: 30,
+  email: "<johndoe@example.com>",
+  });
+  const updateUserEmail = (newEmail) => {
+  // Không nên thay đổi trạng thái đối tượng user trực tiếp
+  // Tạo một bản sao mới và cập nhật state
+  const updatedUser = { ...user, email: newEmail };
+  setUser(updatedUser);
+  };
 
-    return (
-      <div>
-        <p>Tên: {user.name}</p>
-        <p>Tuổi: {user.age}</p>
-        <p>Email: {user.email}</p>
-        <button onClick={() => updateUserEmail("newemail@example.com")}>
-        Đổi Email
-        </button>
-      </div>
-    );
-    }
+  return (
+  <div>
+  <p>Tên: {user.name}</p>
+  <p>Tuổi: {user.age}</p>
+  <p>Email: {user.email}</p>
+  <button onClick={() => updateUserEmail("newemail@example.com")}>
+  Đổi Email
+  </button>
+  </div>
+  );
+  }
 
 ## UseEffect trong React
 
 - là một hook của react dùng để side effects sau khi component được render.
 - Một số ví dụ về side effects:
-| Tác vụ                    | Ví dụ                                        |
-| ------------------------- | -------------------------------------------- |
-| Gọi API                   | Lấy dữ liệu từ server                        |
-| Thay đổi DOM              | Tự động scroll, đặt focus                    |
-| Set timeout / interval    | Đếm giờ, thực hiện hành động định kỳ         |
-| Lưu vào localStorage      | Lưu trạng thái form, giỏ hàng                |
-| Đồng bộ với sự kiện ngoài | Lắng nghe sự kiện từ bàn phím, window resize |
+  | Tác vụ | Ví dụ |
+  | ------------------------- | -------------------------------------------- |
+  | Gọi API | Lấy dữ liệu từ server |
+  | Thay đổi DOM | Tự động scroll, đặt focus |
+  | Set timeout / interval | Đếm giờ, thực hiện hành động định kỳ |
+  | Lưu vào localStorage | Lưu trạng thái form, giỏ hàng |
+  | Đồng bộ với sự kiện ngoài | Lắng nghe sự kiện từ bàn phím, window resize |
 
 ## Life cycle trong react (class component)
 
@@ -170,11 +170,11 @@ everything relative with react
 
 - setup
 - cleanup
-| Class method           | useEffect tương ứng                             |
-| ---------------------- | ----------------------------------------------- |
-| `componentDidMount`    | `useEffect(() => {...}, [])`                    |
-| `componentDidUpdate`   | `useEffect(() => {...}, [deps])`                |
-| `componentWillUnmount` | Cleanup trong `useEffect`: `return () => {...}` |
+  | Class method | useEffect tương ứng |
+  | ---------------------- | ----------------------------------------------- |
+  | `componentDidMount` | `useEffect(() => {...}, [])` |
+  | `componentDidUpdate` | `useEffect(() => {...}, [deps])` |
+  | `componentWillUnmount` | Cleanup trong `useEffect`: `return () => {...}` |
 
 Dùng trong các giai đoạn:
 
@@ -193,9 +193,9 @@ Dùng trong các giai đoạn:
 - `BrowserRouter` là một thành phần được sử dụng để bọc toàn bộ ứng dụng reactjs, sử dụng HTML5 history API (thay đổi url của trang web mà không cần reload lại trang) để giữ cho URL được đồng bộ với trạng thái ứng dụng.
 - Route là thành phần để xác định một đường dẫn và liên kết nó với một component React cụ thể. Nếu đường dẫn trên thanh địa chỉ phù hợp với định nghĩa trong Route, component được chỉ định sẽ được hiển thị.
 
-    import { Route } from 'react-router-dom';
-    function App() {
-      return (
+  import { Route } from 'react-router-dom';
+  function App() {
+  return (
     <div>
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
@@ -218,3 +218,33 @@ Dùng trong các giai đoạn:
 
 - Switch được sử dụng để bao bọc các thành phần Route, với Route trang web sẽ render và hiển thị các thành phần đầu tiên phù hợp với địa chỉ. Điều này giúp tránh hiển thị nhiều component cùng lúc.
 - Redirect là một thành phần được sử dụng để chuyển hướng người dùng từ một đường dẫn khác. Nếu người dùng truy cập đường dẫn được xác định trong Redirect, họ sẽ được chuyển hướng đến địa chỉ mới.
+- `useNavigate()` dùng để điều hướng trang (sử dụng trong button
+  const handleClick = () => {
+  // Điều hướng đến trang /about
+  navigate('/about');
+  };
+  )
+- `useParams()` lấy tham số
+- Lazy loading, bọc import component vào React.lazy()
+
+#### Axios
+
+| Tính năng        | Mô tả ngắn                                    |
+| ---------------- | --------------------------------------------- |
+| HTTP methods     | `GET`, `POST`, `PUT`, `DELETE`, `PATCH`, ...  |
+| Promise-based    | Dễ dùng với `.then()` hoặc `async/await`      |
+| Custom headers   | Hỗ trợ xác thực, metadata, API key,...        |
+| FormData support | Gửi tệp tin, ảnh,... dễ dàng                  |
+| Interceptors     | Xử lý logic chung cho request/response        |
+| Tạo instance     | Dùng cho nhiều API khác nhau trong cùng dự án |
+
+#### Custom header
+
+| Header           | Mục đích                            |
+| ---------------- | ----------------------------------- |
+| `Authorization`  | Xác thực người dùng (token, bearer) |
+| `Content-Type`   | Chỉ định kiểu dữ liệu gửi           |
+| `X-User-ID`      | Gửi thông tin người dùng            |
+| `X-API-Key`      | Bảo mật nội bộ                      |
+| `X-App-Version`  | Tracking phiên bản app              |
+| `X-Feature-Flag` | Bật/tắt tính năng thử nghiệm        |
